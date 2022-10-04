@@ -1,0 +1,8 @@
+.wp-block {
+    max-width: 1150px;
+}
+.wp-block-quote {
+  padding-left: 35px;
+  box-shadow: inset 5px 0px #4caf508f;
+  border: 0;
+}
