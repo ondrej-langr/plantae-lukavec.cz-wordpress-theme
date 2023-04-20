@@ -24,19 +24,20 @@
                 <span>50801</span><br>
                 <hr>
                 <span class="s">IČO: 69148007</span><br>
-                <span class="s">DIČ: CZ6911103177</span><br>
+                <span class="s">Č.Ú.:8825027001/5500</span><br>
+                <span class="s">IBAN: CZ56 5500 0000 0088 2502 7001</span><br>
               </address>
             </div>
             <div class="links">
               <ul>
                 <li>
                   <a href="tel:606651356">
-                    <i class="fas fa-phone" aria-hidden></i> <span>Telefon</span>
+                    <i class="fas fa-phone" aria-hidden></i> <span>606 651 356</span>
                   </a>
                 </li>
                 <li>
-                  <a href="mailto:michal@plantae-lukavec.cz?subject=Zpráva">
-                    <i class="fas fa-envelope" aria-hidden></i> <span>Mail</span>
+                  <a href="mailto:jon.m@seznam.cz?subject=Zpráva">
+                    <i class="fas fa-envelope" aria-hidden></i> <span>jon.m@seznam.cz</span>
                   </a>
                 </li>
                 <li>

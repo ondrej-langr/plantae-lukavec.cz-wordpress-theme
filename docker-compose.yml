@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  plantae-web:
+    build: .
+    volumes:
+      - ./:/usr/src/wordpress/wp-content/themes/zahradnictvi
+      - ./.wp-data/wp-plugins:/usr/src/wordpress/wp-content/plugins
+      - ./.wp-data/wp-uploads:/usr/src/wordpress/wp-content/uploads
+      # Ignore .wp-data which is used for development
+      - /usr/src/wordpress/wp-content/themes/zahradnictvi/.wp-data
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: example
+      WORDPRESS_DB_PASSWORD: example
+      WORDPRESS_DB_NAME: example
+    ports:
+      - "8080:80"
+  plantae-db:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: example
+      MYSQL_USER: example
+      MYSQL_PASSWORD: example
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - plantae-web-data:/var/lib/mysql
+
+volumes:
+  plantae-web-data:

@@ -28,6 +28,11 @@ table {
 /* Template Page Layout
 ------------------------------------------*/
 
+#container {
+	
+	font-size: 114%;
+
+}
 
 /* Main Body */
 body {

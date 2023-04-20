@@ -62,7 +62,7 @@
     <?php elseif (is_front_page()): ?>
       <main scope="front-page">
         <section class="preview pos-rel">
-          <img src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="<?php echo get_the_post_thumbnail_url(get_the_ID(), array(1920,1080)); ?>" class="b-lazy h-100 parallaxed_img">
+          <img src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="<?php echo get_the_post_thumbnail_url(get_the_ID(), array(1921,1080)); ?>" class="b-lazy h-100 parallaxed_img">
           <div class="pos-abs w-100 h-100 cleareset"></div>
          <!--  <div class='icon-scroll mouse centerX'></div> -->
           <i class="fas fa-angle-down animated fadeInDown infinite mouse centerX pos-abs" aria-hidden></i>

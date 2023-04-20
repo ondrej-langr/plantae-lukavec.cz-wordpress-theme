@@ -1,14 +1,19 @@
 <?php
+
 add_action('woocommerce_before_shop_loop_item', function () {
   echo '<div class="kytimg h-100 pos-rel"><div class="shadow">';
 }, 10, 0);
+
 add_action('woocommerce_before_shop_loop_item_title', function () {
   echo "</div></div><div header>";
 }, 10, 0);
+
 add_action('woocommerce_after_shop_loop_item', function () {
   echo "</div>";
 }, 10, 0);
+
 add_filter('woocommerce_show_page_title', '__return_null');
+
 add_theme_support('wc-product-gallery-lightbox');
 function remove_woo_elements()
 {
@@ -68,13 +73,6 @@ function clear_wc_shipping_rates_cache()
   }
 }
 
-//----------------------------------
-
-
-
-
-//-----------------------------------
-
 
 function disable_shipping_calc_on_cart($show_shipping)
 {
@@ -109,3 +107,15 @@ function filter_process_payment_order_status_callback($status, $order)
 // add the filter 
 add_filter('woocommerce_cod_process_payment_order_status', 'filter_process_payment_order_status_callback', 10, 2);
 add_filter('woocommerce_bacs_process_payment_order_status', 'filter_process_payment_order_status_callback', 10, 2);
+
+add_filter('woocommerce_gateway_title', 'change_payment_gateway_title', 25, 2);
+
+function change_payment_gateway_title($titleWithPrice)
+{
+  $splitted = explode("(", $titleWithPrice);
+
+  $titleWithoutPrice = trim($splitted[0]);
+  $price = trim(str_replace(")", "", $splitted[1]));
+
+  return "<span class='gateway-title'>$titleWithoutPrice</span> <span class='gateway-price'>$price</span>";
+}
