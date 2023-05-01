@@ -119,3 +119,15 @@ function change_payment_gateway_title($titleWithPrice)
 
   return "<span class='gateway-title'>$titleWithoutPrice</span> <span class='gateway-price'>$price</span>";
 }
+
+
+add_filter( 'woocommerce_get_order_item_totals', 'removePaymentMethodPriceFromEmail', 10, 3 );
+function removePaymentMethodPriceFromEmail( $total_rows, $order, $tax_display ){
+    // On Email notifications only
+    if ( ! is_wc_endpoint_url() ) {
+      [$title] = explode(" <span class='gateway-price'", $order->get_payment_method_title());
+
+       $total_rows['payment_method']['value'] = $title;
+    }
+    return $total_rows;
+}
