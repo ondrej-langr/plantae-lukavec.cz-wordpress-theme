@@ -53,7 +53,7 @@
         <<?php echo $ele_type; ?> id="hinfo" class="pos-rel post-header">
         <div class="parallaxed pos-abs w-100">
           <div class="pos-abs w-100 h-100 clearset"></div>
-          <img src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="<?php echo get_the_post_thumbnail_url(get_the_ID(),'large'); ?>" data-src-small="<?php echo get_the_post_thumbnail_url(get_the_ID(),'medium_large'); ?>" class="b-lazy w-100 parallaxed_img">
+          <img src="<?php echo get_the_post_thumbnail_url(get_the_ID(),'medium_large'); ?>" data-src="<?php echo get_the_post_thumbnail_url(get_the_ID(),'large'); ?>" class="b-lazy w-100">
         </div>
         <div class="pos-rel" style="z-index: 1;">
           <?php the_title('<h1>', '</h1>'); ?>
@@ -62,9 +62,8 @@
     <?php elseif (is_front_page()): ?>
       <main scope="front-page">
         <section class="preview pos-rel">
-          <img src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="<?php echo get_the_post_thumbnail_url(get_the_ID(), array(1921,1080)); ?>" class="b-lazy h-100 parallaxed_img">
+          <img src="<?php echo get_the_post_thumbnail_url(get_the_ID(), array(1921,1080)); ?>" class="b-lazy parallaxed_img">
           <div class="pos-abs w-100 h-100 cleareset"></div>
-         <!--  <div class='icon-scroll mouse centerX'></div> -->
           <i class="fas fa-angle-down animated fadeInDown infinite mouse centerX pos-abs" aria-hidden></i>
           <h1 class="centerXY pos-abs" ><div data-aos="fade-up" data-aos-offset="100" data-aos-delay="200" data-aos-duration="1000"><?php bloginfo('name'); ?></div></h1>
         </section>
@@ -79,7 +78,7 @@
               $src = rand_term_image();
             }
           ?>
-          <img src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="<?php echo $src; ?>" alt="" class="b-lazy w-100 parallaxed_img">
+          <img src="<?php echo $src; ?>" alt="" class="b-lazy w-100 parallaxed_img">
         </div>
         <div class="pos-abs w-100 h-100 clearset">
 
@@ -94,7 +93,7 @@
     <?php else: ?>
       <<?php echo $ele_type; ?> id="hinfo" class="pos-rel">
         <div class="pos-abs w-100 h-100 background">
-          <img src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="<?php echo get_theme_mod('header_image') ?>" alt="" class="b-lazy w-100 parallaxed_img">
+          <img src="<?php echo get_theme_mod('header_image') ?>" loading="lazy" alt="" class="b-lazy w-100 parallaxed_img">
         </div>
         <div class="pos-abs w-100 h-100 clearset">
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Customer processing order email
+ * Customer processing order email -- this is second in the order
  *
  * This template can be overridden by copying it to yourtheme/woocommerce/emails/customer-processing-order.php.
  *
@@ -20,14 +20,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /*
- * @hooked WC_Emails::email_header() Output the email header
+ * @hooked WC_Emails::email_header() Output the email header 
  */
 do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
 <?php /* translators: %s: Customer first name */ ?>
-<p><?php printf( esc_html__( 'Hi %s,', 'woocommerce' ), esc_html( $order->get_billing_first_name() ) ); ?></p>
-<?php /* translators: %s: Order number */ ?>
-<p><?php printf( esc_html__( 'Obdrželi jsme Vaši objednávku #%s a nyní na ní pracujeme. Pokud neobdržíme platbu do sedmi dní tak objednávku stornujeme - neplatí u platby přes dobírku.', 'woocommerce' ), esc_html( $order->get_order_number() ) ); ?></p>
+<p><?php printf( esc_html__( 'Děkujeme za objednávku, %s!', 'woocommerce' ), esc_html( $order->get_billing_first_name() ) ); ?></p>
+<?php 
+	/* translators: %s: Order number */ 
+	// If user selects bank transfer method
+	$isBankTransferPaymentMethod = $order->get_payment_method() === 'bacs';
+?>
+<p><?php printf( esc_html__( 'Obdrželi jsme Vaši objednávku #%s a nyní na ní pracujeme.' . ($isBankTransferPaymentMethod ? "<br/><b style='color:red'>Zvolili jste platbu bankovním převodem! V případě, že platbu neobdržíme do sedmi dnů, objednávku rušíme a zboží vracíme zpět do nabídky. Děkujeme za pochopení.</b>" : ""), 'woocommerce' ), esc_html( $order->get_order_number() ) ); ?></p>
 
 <?php
 

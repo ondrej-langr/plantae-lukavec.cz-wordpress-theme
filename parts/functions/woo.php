@@ -54,7 +54,7 @@ function tarkan_adjust_shipping_rate($rates)
     foreach ($rates as $rate_id => $rate) {
       $cost = $rate->cost;
       // Cost is now 140 and 'cod' (platba dobírkou) is 175 so we have to do 175 - 140
-      $additionalCost = 175 - $cost;
+      $additionalCost = 185 - $cost;
       $rates[$rate_id]->cost = $cost + $additionalCost;
     }
   }
@@ -104,7 +104,7 @@ function filter_process_payment_order_status_callback($status, $order)
   return 'on-hold';
 }
 
-// add the filter 
+// add the filter
 add_filter('woocommerce_cod_process_payment_order_status', 'filter_process_payment_order_status_callback', 10, 2);
 add_filter('woocommerce_bacs_process_payment_order_status', 'filter_process_payment_order_status_callback', 10, 2);
 

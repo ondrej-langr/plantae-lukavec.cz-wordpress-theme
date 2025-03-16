@@ -9,7 +9,7 @@ function newestpostzl()
   $post = $recent_posts[0];
   $message = '<article class="special newestpost">';
   $message .= "<header>";
-  $message .= '<img src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="' . get_the_post_thumbnail_url($post['ID'], 'large') . '" class="b-lazy w-100 centerXY pos-abs">';
+  $message .= '<img src="' . get_the_post_thumbnail_url($post['ID'], 'large') . '" class="b-lazy w-100 centerXY pos-abs">';
   $message .= '<div class="cleareset w-100 h-100" >';
   $message .= "<div data-aos='fade-up' data-aos-duration='1000'>";
   $message .= '<p class="inf">nejnovejší příspěvek</p>';
