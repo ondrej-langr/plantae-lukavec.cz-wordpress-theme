@@ -1,0 +1,7 @@
+@import 'tailwindcss' source(none);
+
+@source "../../";
+
+@import './global.css';
+@import 'animate.css';
+@import 'aos/dist/aos.css';
