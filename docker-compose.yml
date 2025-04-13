@@ -1,30 +1,41 @@
 version: '3'
 
 services:
-  plantae-web:
-    build: .
-    volumes:
-      - ./:/usr/src/wordpress/wp-content/themes/zahradnictvi
-      - ./.wp-data/wp-plugins:/usr/src/wordpress/wp-content/plugins
-      - ./.wp-data/wp-uploads:/usr/src/wordpress/wp-content/uploads
-      # Ignore .wp-data which is used for development
-      - /usr/src/wordpress/wp-content/themes/zahradnictvi/.wp-data
-    environment:
-      WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: example
-      WORDPRESS_DB_PASSWORD: example
-      WORDPRESS_DB_NAME: example
-    ports:
-      - "8080:80"
-  plantae-db:
-    image: mysql:5.7
-    environment:
-      MYSQL_DATABASE: example
-      MYSQL_USER: example
-      MYSQL_PASSWORD: example
-      MYSQL_RANDOM_ROOT_PASSWORD: '1'
-    volumes:
-      - plantae-web-data:/var/lib/mysql
+    wordpress:
+        build: .
+        volumes:
+            - ./:/var/www/html/wp-content/themes/zahradnictvi
+            # Copy sql backup so we can use it further
+            - ./.wp-data/backup.sql:/var/www/backup.sql
+            - ./.wp-data/.htaccess:/var/www/.htaccess
+            - ./.wp-data/wp-plugins:/var/www/html/wp-content/plugins
+            - ./.wp-data/wp-uploads:/var/www/html/wp-content/uploads
+            # Ignore .wp-data which is used for development
+            - /var/www/html/wp-content/themes/zahradnictvi/.wp-data
+        env_file: ./.env
+        ports:
+            - '8080:80'
+        depends_on:
+            - db
+
+    adminer:
+        image: adminer:latest
+        restart: always
+        depends_on:
+            - db
+        ports:
+            - 8081:8080
+
+    db:
+        image: mysql:latest
+        environment:
+            MYSQL_DATABASE: example
+            MYSQL_USER: example
+            MYSQL_PASSWORD: example
+            MYSQL_ROOT_PASSWORD: example
+            MYSQL_RANDOM_ROOT_PASSWORD: '1'
+        # volumes:
+        # - plantae-web-data:/var/lib/mysql
 
 volumes:
-  plantae-web-data:
+    plantae-web-data:

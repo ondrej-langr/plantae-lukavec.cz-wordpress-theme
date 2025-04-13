@@ -1,34 +1,34 @@
-# Build node
-FROM node:16-alpine AS nodeBuilder
+# Use the official WordPress image as the base
+FROM wordpress:php8.4-apache
 
-WORKDIR /build-content
-COPY ./ ./
-RUN npm install
-RUN npm run build
-RUN rm -r node_modules -f
+# Install required tools and dependencies
+RUN apt-get update && apt-get install -y \
+    less \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 
-# Build PHP
-# FROM composer:latest AS phpBuilder
+# Install WP-CLI
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+    && chmod +x wp-cli.phar \
+    && mv wp-cli.phar /usr/local/bin/wp
 
-# WORKDIR /build-content
-# COPY ./ ./
-# RUN composer install --no-dev
+# Install Mysql
+RUN apt-get update && \
+    apt-get install -y default-mysql-client && \
+    rm -rf /var/lib/apt/lists/*
 
-# WORKDIR /build-content/wp-content/plugins
-# RUN apk add wget
+# Set working directory to WordPress root
+WORKDIR /var/www/html
 
-# RUN wget https://downloads.wordpress.org/plugin/advanced-custom-fields.zip && unzip advanced-custom-fields.zip && rm advanced-custom-fields.zip
-# RUN wget https://downloads.wordpress.org/plugin/navz-photo-gallery.zip && unzip navz-photo-gallery.zip && rm navz-photo-gallery.zip
+# Expose port 80 for the web server
+EXPOSE 80
 
-# Publish
-FROM wordpress:apache
-WORKDIR /usr/src/wordpress
+# Add entrypoint script to automate WordPress setup using WP-CLI
+COPY wpcli.entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/wpcli.entrypoint.sh
 
-RUN set -eux; \
-	find /etc/apache2 -name '*.conf' -type f -exec sed -ri -e "s!/var/www/html!$PWD!g" -e "s!Directory /var/www/!Directory $PWD!g" '{}' +; \
-	cp -s wp-config-docker.php wp-config.php
+# Copy wordpress installation before anything starts, this is because we execute wp-cli afterwards
+# RUN mv /usr/src/wordpress/ /var/www/html/ # RUN php -d memory_limit=512M "$(which wp)" core download --path=/var/www/html --locale=cs_CZ --allow-root
 
-COPY ./ ./wp-content/themes/zahradnictvi/
-# COPY --from=phpBuilder /build-content/vendor ./wp-content/themes/zahradnictvi/vendor
-# COPY --from=phpBuilder /build-content/wp-content/plugins ./wp-content/plugins
-# COPY --from=nodeBuilder /build-content/dist ./wp-content/themes/zahradnictvi/dist
+# Use the custom entrypoint script
+ENTRYPOINT ["wpcli.entrypoint.sh"]
