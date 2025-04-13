@@ -4,7 +4,8 @@
     "description": "",
     "type": "module",
     "scripts": {
-        "build": "vite build --emptyOutDir"
+        "build": "vite build --emptyOutDir",
+        "dev": "vite"
     },
     "author": "",
     "license": "ISC",
