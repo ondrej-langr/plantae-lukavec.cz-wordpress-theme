@@ -53,7 +53,7 @@ function tarkan_adjust_shipping_rate($rates)
   if (WC()->session->get('chosen_payment_method') == 'cod') {
     foreach ($rates as $rate_id => $rate) {
       $cost = $rate->cost;
-      // Cost is now 140 and 'cod' (platba dobírkou) is 175 so we have to do 175 - 140
+      // Cost is now 140 and 'cod' (platba dobírkou) is 185 so we have to do 185 - 140
       $additionalCost = 185 - $cost;
       $rates[$rate_id]->cost = $cost + $additionalCost;
     }
@@ -117,7 +117,7 @@ function change_payment_gateway_title($titleWithPrice)
   $titleWithoutPrice = trim($splitted[0]);
   $price = trim(str_replace(")", "", $splitted[1]));
 
-  return "<span class='gateway-title'>$titleWithoutPrice</span> <span class='gateway-price'>$price</span>";
+  return is_admin() ? "$titleWithoutPrice ($price)" : "<span class='gateway-title'>$titleWithoutPrice</span> <span class='gateway-price'>$price</span>";
 }
 
 
