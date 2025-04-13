@@ -2,3 +2,8 @@
 node_modules
 assets/build
 .DS_Store
+.env
+vendor
+/private/
+!private/.htaccess
+/vendor/
