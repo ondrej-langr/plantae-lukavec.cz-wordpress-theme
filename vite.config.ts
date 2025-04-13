@@ -11,10 +11,14 @@ export default defineConfig({
         manifest: true,
         minify: 'terser',
         lib: {
-            formats: ['umd'],
-            entry: 'index.ts',
+            formats: ['es'],
+            entry: {
+                global: 'global/global.ts',
+                adminWoocommerce: 'admin/admin.ts',
+            },
             name: 'plantae-lukavec-frontend',
-            fileName: `plantae-lukavec-frontend-${now}`,
+            fileName: (format, entryName) =>
+                `plantae-lukavec-frontend-${entryName}-${now}`,
         },
     },
     define: {

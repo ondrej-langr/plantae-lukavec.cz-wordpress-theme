@@ -1,6 +1,6 @@
 @import 'tailwindcss' source(none);
 
-@source "../../";
+@source "../../../";
 
 @import './global.css';
 @import 'animate.css';
