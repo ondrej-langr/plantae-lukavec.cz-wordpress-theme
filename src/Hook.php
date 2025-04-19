@@ -8,6 +8,10 @@ abstract class Hook {
 
     }
 
+    function onWooEmailBeforeOrderTable(callable $callback, int|null $priority = null) {
+         add_action( 'woocommerce_email_before_order_table', $callback, $priority, 4);
+    }
+
     function onAdminInit(callable $callback, int|null $priority = null) {
          add_action( 'admin_init', $callback, $priority);
     }
