@@ -26,9 +26,9 @@ php -d memory_limit=512M "$(which wp)" config create --dbhost=$HOST --dbname="$W
 # Replace old with new after migration from production database
 wp search-replace https://plantae-lukavec.cz http://localhost:8080 --all-tables --allow-root
 
-wp user update admin --user_pass="password" --allow-root
+wp user --allow-root update admin --user_pass="password"
 
-wp plugin install --activate --allow-root \
+wp plugin --allow-root install --activate \
     contact-form-7 \
     woocommerce \
     custom-payment-gateways-woocommerce \
@@ -39,19 +39,18 @@ wp plugin install --activate --allow-root \
     plausible-analytics \
     woo-preview-emails \
     shopmagic-for-woocommerce \
-    shopmagic-for-woocommerce \
     lightweight-grid-columns \
     woocommerce-easy-table-rate-shipping \
     visual-term-description-editor \
     woocommerce-services
 
-wp plugin uninstall hello-dolly akismet --alow-root
+wp plugin --alow-root uninstall hello-dolly akismet
 
-wp theme delete twentytwentyfive --alow-root
+wp theme --alow-root delete twentytwentyfive
 
-wp config set --raw --alow-root WP_DEBUG true
-wp config set --raw --alow-root WP_DEBUG_LOG true
-wp config set --raw --alow-root WP_DEBUG_DISPLAY false
+wp config --alow-root set --raw WP_DEBUG true
+wp config --alow-root set --raw WP_DEBUG_LOG true
+wp config --alow-root set --raw WP_DEBUG_DISPLAY false
 
 wp theme activate zahradnictvi --allow-root
 
